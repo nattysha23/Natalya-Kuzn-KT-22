@@ -1,4 +1,5 @@
 using KuznNat_Kt_23.Database;
+using KuznNat_Kt_23.ServiceExtensions;
 using Microsoft.EntityFrameworkCore;
 using NLog;
 using NLog.Web;
@@ -23,7 +24,7 @@ try
     builder.Services.AddDbContext<UniversityDbContext>(options =>
   options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-
+    builder.Services.AddServices();
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
