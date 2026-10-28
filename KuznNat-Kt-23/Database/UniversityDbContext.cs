@@ -10,11 +10,11 @@ namespace KuznNat_Kt_23.Database
 
 
         //Добавляем таблицы
-        DbSet<Student> Students { get; set; }
-        DbSet<Group> Groups { get; set; }
-        DbSet<Student> Specialitys { get; set; }
-        DbSet<Student> Grades { get; set; }
-        DbSet<Student> Disciplines { get; set; }
+       public DbSet<Student> Students { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<Student> Specialitys { get; set; }
+        public DbSet<Student> Grades { get; set; }
+        public DbSet<Student> Disciplines { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -22,19 +22,37 @@ namespace KuznNat_Kt_23.Controllers
             _studentService = studentService;
         }
 
-        [HttpPost("by_groupname", Name ="GetStudentsByGroup")]
+        [HttpGet("by_groupname", Name ="GetStudentsByGroup")]
 
-        public async Task<IActionResult> GetStudentsByGroupAsync(StudentGroupFilter filter, CancellationToken cancellationToken=default)
+        public async Task<IActionResult> GetStudentsByGroupAsync([FromQuery] StudentGroupFilter filter, CancellationToken cancellationToken=default)
         {
          var students= await _studentService.GetStudentsByGroupAsync(filter, cancellationToken);
             return Ok(students);
         }
-        [HttpPost("by-lastname", Name = "GetStudentsByLastName")]
-        public async Task<IActionResult> GetStudentsByLastNameAsync(StudentLastNameFilter filter, CancellationToken cancellationToken = default)
+
+       
+        
+        [HttpGet("by-lastname", Name = "GetStudentsByLastName")]
+        public async Task<IActionResult> GetStudentsByLastNameAsync([FromQuery] StudentLastNameFilter filter, CancellationToken cancellationToken = default)
         {
             var students = await _studentService.GetStudentsByLastNameAsync(filter, cancellationToken);
             return Ok(students);
         }
+
+        [HttpPost("create", Name = "CreateStudent")]
+        public async Task<IActionResult> CreateStudent([FromBody] CreateStudentParams data, CancellationToken cancellationToken)
+        {
+            var student = new Student()
+            {
+                FirstName = data.FirstName,
+                LastName = data.LastName,
+                GroupId = data.GroupId
+            };
+            var newStudent = await _studentService.AddStudentAsync(student, cancellationToken);
+
+            return Ok(newStudent);
+        }
+        public record CreateStudentParams(string FirstName, string LastName, int GroupId);
 
     }
 

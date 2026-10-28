@@ -1,5 +1,6 @@
 ﻿
 
+using static IGroupService;
 using static IStudentService;
 
 namespace KuznNat_Kt_23.ServiceExtensions
@@ -10,6 +11,7 @@ namespace KuznNat_Kt_23.ServiceExtensions
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<IGroupService, GroupService>();
             return services;
         }
     }
